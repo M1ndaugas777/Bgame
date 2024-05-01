@@ -273,20 +273,20 @@ def register(request):
         if password == password2:
 
             if User.objects.filter(username=username).exists():
-                messages.error(request, f'Vartotojo vardas {username} užimtas!')
+                messages.error(request, f'Username {username} Already taken!')
                 return redirect('register')
             else:
 
                 if User.objects.filter(email=email).exists():
-                    messages.error(request, f'Vartotojas su el. paštu {email} jau užregistruotas!')
+                    messages.error(request, f'User with this {email} Already exists!')
                     return redirect('register')
                 else:
 
                     User.objects.create_user(username=username, email=email, password=password)
-                    messages.info(request, f'Vartotojas {username} užregistruotas!')
+                    messages.info(request, f'Username {username} Already taken!')
                     return redirect('login')
         else:
-            messages.error(request, 'Slaptažodžiai nesutampa!')
+            messages.error(request, 'Passwords do not match!')
             return redirect('register')
     return render(request, 'register.html')
 
@@ -372,18 +372,6 @@ def healing_items(request):
         'player': player,
         'player_username': request.user.username,
     })
-
-
-@login_required
-def use_item(request, item_id):
-    try:
-        inventory_item = Inventory.objects.get(pk=item_id)
-        player = request.user.player
-        inventory_item.use_item(player)
-    except Inventory.DoesNotExist:
-        return redirect('healing_items')
-
-    return redirect('healing_items')
 
 
 @login_required
