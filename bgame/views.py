@@ -49,6 +49,7 @@ def main(request):
     })
 
 
+@login_required
 def location_detail(request, location_name):
     location = Location.objects.get(name=location_name)
     enemies_in_location = Enemy.objects.filter(location=location)
@@ -56,6 +57,7 @@ def location_detail(request, location_name):
     return render(request, 'location_detail.html', {'location': location, 'enemies_in_location': enemies_in_location})
 
 
+@login_required
 def city_location_detail(request, location_name):
     player = request.user.player
     city_location = get_object_or_404(CityLocation, city_location_name=location_name)
@@ -160,6 +162,7 @@ def enemy_detail(request, enemy_name, username):
     })
 
 
+@login_required
 def attack_results(request, username, enemy_name):
     player = get_object_or_404(Player, username__username=username)
     enemy = get_object_or_404(Enemy, name=enemy_name)
@@ -382,6 +385,7 @@ def use_item(request, item_id):
     return redirect('healing_items')
 
 
+@login_required
 def buy_item(request, username, item_name, city_location_name):
     if request.method == 'POST':
         player = get_object_or_404(Player, username__username=username)
@@ -399,6 +403,7 @@ def buy_item(request, username, item_name, city_location_name):
     return HttpResponse("Invalid request")
 
 
+@login_required
 def sell_item(request, username, item_name, city_location_name):
     if request.method == 'POST':
         player = get_object_or_404(Player, username__username=username)
@@ -454,6 +459,7 @@ def items_by_type(request, item_type):
     return render(request, template_name, {'items': items, 'player_username': request.user.username})
 
 
+@login_required
 def totem_detail(request, totem_name):
     player = request.user.player
     totem = Totem.objects.get(player=player, totem_name=totem_name)
@@ -477,6 +483,7 @@ def totem_detail(request, totem_name):
     return render(request, 'totem_detail.html', context)
 
 
+@login_required
 def elder_detail(request):
     player = request.user.player
     elder = player.wise_elder
@@ -513,14 +520,17 @@ def elder_detail(request):
     return render(request, 'elder_detail.html', context)
 
 
+@login_required
 def about(request):
     return render(request, 'about.html')
 
 
+@login_required
 def frequent_questions(request):
     return render(request, 'frequent_questions.html')
 
 
+@login_required
 def highscores(request):
     players = Player.objects.order_by('-level')
     return render(request, 'highscores.html', {'players': players})
