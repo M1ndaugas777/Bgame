@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <img src="{% static 'images/main.jpg' %}" alt="" class="background-image">
+
+    {% if user.is_authenticated %}
+        <div class="top-side-stuff">
+            <ul class="horizontal-list">
+                <li><a href="{% url 'player_details' player_username %}">{{ user.get_username }}</a></li>
+                <li><a href="{% url 'about' %}" >About Bgame</a></li>
+                <li><a href="{% url 'frequent_questions' %}" >FAQ</a></li>
+                <li><a href="{% url 'highscores' %}" >Best results</a></li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}?next=/bgame/main/">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="content2">
+            <strong class="crimson2">Your information</strong>
+            <ul>
+                <li class="main-text1p25"><strong>Name:</strong> {{ player_username }}</li>
+                <li class="main-text1p25"><strong>Level:</strong> {{ player_level }}</li>
+                <li class="main-text1p25"><strong>Health:</strong> {{ player_health }} <strong>/</strong> {{ player_maximum_health }}</li>
+                <li class="main-text1p25"><strong>Strength:</strong> {{ player_strength }}</li>
+                <li class="main-text1p25"><strong>Defense:</strong> {{ player_defense }}</li>
+                <li class="main-text1p25"><strong>Experience:</strong> {{ player_experience }} <strong>/</strong> {{ player_experience_threshold }}</li>
+                <li class="main-text1p25"><strong>Gold:</strong> {{ player_gold }}</li>
+                <li class="main-text1p25"><strong>Attribute points:</strong> {{ player_attribute_points }}</li>
+                <li><a class="main-text1p25" href="{% url 'player_details' player_username %}">Spend attribute points</a></li>
+                <li><a class="main-text1p25" href="{% url 'inventory' player_username %}">Inventory</a></li>
+            </ul>
+            <strong class="crimson2">Shopping district</strong>
+            <ul>
+                {% for location in city_locations %}
+                    <li><a class="main-text1p25" href="{% url 'city_location_detail' location_name=location.city_location_name %}">{{ location.city_location_name }}</a></li>
+                {% endfor %}
+            </ul>
+            <strong class="crimson2">Totems</strong>
+            <ul>
+                {% for totem in totems %}
+                    <li><a class="main-text1p25" href="{% url 'totem_detail' totem_name=totem.totem_name %}">{{ totem.totem_name }}</a></li>
+                {% endfor %}
+            </ul>
+            <ul>
+                <li><strong class="crimson2">The wise elder</strong></li>
+                <li><a class="main-text1p25" href="{% url 'elder_detail' %}">Visit the wise elder</a></li>
+            </ul>
+            <strong class="crimson2">Hostile locations</strong>
+            <ul>
+                {% for location in locations %}
+                    <li><a class="main-text1p25" href="{% url 'location_detail' location_name=location.name %}">{{ location.name }}</a></li>
+                {% endfor %}
+            </ul>
+    </div>
+
+
+    {% else %}
+    <div class="content">
+        <ul>
+            <li><a class="main-text1p25" href="{% url 'login'%}">Login</a></li>
+            <li><a class="main-text1p25" href="{% url 'register' %}">Register</a></li>
+        </ul>
+        </div>
+    {% endif %}
+
+
+</body>
+</html>

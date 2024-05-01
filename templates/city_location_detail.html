@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/shops.jpg' %}" alt="" class="background-image">
+
+<div class="content">
+    <p class="crimson2">You have arrived at <strong>{{ city_location }}</strong></p>
+
+    <ul>
+        <li class="crimson1b5"><strong>Your money: {{ player_money }}</strong></li>
+        {% for item in items_in_store %}
+            <li class="main-text1p25">
+                {{ item.item.item_name }}
+                {% if item.item.healing_power > 0 %}
+                    healing power: <strong>{{ item.item.healing_power }}</strong>
+                {% endif %}
+                {% if item.item.strength_modifier > 0 %}
+                    strength <strong>+{{ item.item.strength_modifier }}</strong>
+                {% endif %}
+                {% if item.item.defense_modifier > 0 %}
+                    defense <strong>+{{ item.item.defense_modifier }}</strong>
+                {% endif %}
+                {% if item.item.health_modifier > 0 %}
+                    max health <strong>+{{ item.item.health_modifier }}</strong>
+                {% endif %}
+                You have: {{ item.quantity }}
+            </li>
+
+            <li class="li1 crimson1b25">
+                <label for="buy_quantity">Buy price: {{ item.item.item_buy_price }}</label>
+                <form method="post" action="{% url 'buy_item' username=player.username item_name=item.item.item_name city_location_name=city_location %}" style="display: inline-block;">
+                    {% csrf_token %}
+                    <input type="number" id="buy_quantity" name="buy_quantity" value="1" min="1" style="display: inline-block;">
+                    <input type="submit" value="Buy" style="display: inline-block;">
+                </form>
+            </li>
+            {% if item.quantity > 0 %}
+                <li class="li1 crimson1b25">
+                    <label for="sell_quantity">Sell price: {{ item.item.item_sell_price }}</label>
+                    <form method="post" action="{% url 'sell_item' username=player.username item_name=item.item.item_name city_location_name=city_location %}" style="display: inline-block;">
+                        {% csrf_token %}
+                        <input type="number" id="sell_quantity" name="sell_quantity" value="1" min="1" max="{{ item.quantity }}">
+                        <input type="submit" value="Sell" style="display: inline-block;">
+                    </form>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <ul>
+        <li><a class="nav-link crimson1b25" href="{% url 'main'%}">Main</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

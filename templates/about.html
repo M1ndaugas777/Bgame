@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/inventory-background.jpg' %}" alt="" class="background-image">
+
+<p class="main-text1p5">Bgame is a fantazy rpg game, where you start with nothing but a rusty sword, some bread, and
+    a few pieces of gold in your pocked. Even thought your beggining are humble, the wise village elder had a prophecy
+    that you are destined to become a most powerfull warrior of all time and defeat The Demon Lord B! After hearing this
+    from the village elder, you pick up your rusty sword and begin a quest to reach The Demon Lord's B palace and defeat
+    him! Best of luck adventurer!</p>
+
+<div class="content">
+
+    <ul>
+    <li><p class="main-text1p5" >While on your quest to fullfill your destiny, you will find:</p></li>
+    <li><p class="main-text1p5" >Over 50 different enemies to defeat.</p></li>
+        <li><p class="main-text1p5" >7 different locations on your way to Demon Lord's Palace.</p></li>
+        <li><p class="main-text1p5" >You will be able to aquire additional knowledge from the village elder.</p></li>
+        <li><p class="main-text1p5" >You will be able to pray to ancient totems and aquire additional strength.</p></li>
+        <li><p class="main-text1p5" >Nearly 100 different items to purchase.</p></li>
+
+    </ul>
+
+<a class="nav-link crimson1b25" href="{% url 'main' %}">Main</a>
+</div>
+</body>
+</html>

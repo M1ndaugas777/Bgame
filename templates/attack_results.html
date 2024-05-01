@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+{% for location_name, enemy_data in enemy_images.items %}
+    {% if location_name == location.name %}
+        {% for enemy_name, image_filename in enemy_data.items %}
+            {% if enemy_name == enemy.name %}
+                {% if location_name == 'Forest' %}
+                    <img src="{% static 'images/hostile_locations/forest.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% elif location_name == 'Evil forest' %}
+                    <img src="{% static 'images/hostile_locations/evil_forest.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% elif location_name == 'Cursed wastelands' %}
+                    <img src="{% static 'images/hostile_locations/cursed_wastelands.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% elif location_name == 'Endless desert' %}
+                    <img src="{% static 'images/hostile_locations/endless_desert.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% elif location_name == 'Demon wastelands' %}
+                    <img src="{% static 'images/hostile_locations/demon_wastelands.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% elif location_name == 'Mountain of dragons' %}
+                    <img src="{% static 'images/hostile_locations/mountain_of_dragons.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% elif location_name == 'Palace of demon lord B' %}
+                    <img src="{% static 'images/hostile_locations/palace.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image2">
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+<div class="content">
+    {% if is_winner %}
+        <ul>
+            <li class="crimson2"><p>You have defeated {{ enemy.name }}!</p></li>
+            <li><p class="main-text1p25">You won!</p></li>
+            <li><p class="main-text1p25">Experience gained: {{ enemy_experience }}</p></li>
+            <li><p class="main-text1p25">Gold gained: {{ enemy_gold_pieces }}</p></li>
+            <li><p class="main-text1p25">Damage taken: {{ enemy_damage_dealt }}</p></li>
+            <li><p class="main-text1p25">Damage dealt: {{ player_damage_dealt }}</p></li>
+            <li><p class="main-text1p25">Remaining health: {{ player_health }}</p></li>
+        </ul>
+    {% endif %}
+
+    {% if level_up %}
+        <ul>
+            <li class="crimson1b25"><p>Congratulations you have reached level {{ player.level }}!</p></li>
+            <li class="crimson1b25"><p>Your health has been restored!</p></li>
+            <li><a class="crimson1b25" href="{% url 'player_details' player_username %}">Spend attribute points</a></li>
+        </ul>
+    {% endif %}
+
+    {% if not is_winner %}
+        <p class="crimson2">You have been defeated by {{ enemy.name }}</p>
+        <p class="main-text1p25">Health remaining for {{ enemy.name }}: {{ enemy_health_remaining }}</p>
+        <p class="main-text1p25">Damage taken: {{ enemy_damage_dealt }}</p>
+        <p class="main-text1p25">Damage dealt: {{ player_damage_dealt }}</p>
+        <p class="main-text1p25">Remaining health: {{ player_health }}</p>
+    {% endif %}
+
+    <ul>
+        <li><a class="nav-link main-text1p25" href="{% url 'main' %}">Main</a></li>
+        <li><a id="fight-again-link" class="nav-link main-text1p25" href="/bgame/attack_results/{{ request.user.username }}/{{ enemy.name }}/">{{ "Fight again" }}</a></li>
+        <li><a class="nav-link main-text1p25" href="{% url 'location_detail' location_name=location.name %}">Return to {{ location.name }}</a></li>
+    </ul>
+
+    <span class="crimson1b25" id="message"></span>
+</div>
+
+<script>
+    document.getElementById('fight-again-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        var link = this;
+        var message = document.getElementById('message');
+
+        link.style.pointerEvents = 'none';
+        link.style.color = '#888';
+        message.textContent = 'Fight in progress!';
+
+        setTimeout(function() {
+            link.style.pointerEvents = 'auto';
+            link.style.color = '#000';
+            message.textContent = 'Redirecting...';
+            window.location.href = link.href;
+        }, 3000);
+    });
+</script>
+
+</body>
+</html>

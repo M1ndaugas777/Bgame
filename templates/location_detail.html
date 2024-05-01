@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+{% if location.name == 'Forest' %}
+    <img src="{% static 'images/hostile_locations/forest.jpg' %}" alt="" class="background-image">
+{% elif location.name == 'Evil forest' %}
+    <img src="{% static 'images/hostile_locations/evil_forest.jpg' %}" alt="" class="background-image">
+{% elif location.name == 'Cursed wastelands' %}
+    <img src="{% static 'images/hostile_locations/cursed_wastelands.jpg' %}" alt="" class="background-image">
+{% elif location.name == 'Endless desert' %}
+    <img src="{% static 'images/hostile_locations/endless_desert.jpg' %}" alt="" class="background-image">
+{% elif location.name == 'Demon wastelands' %}
+    <img src="{% static 'images/hostile_locations/demon_wastelands.jpg' %}" alt="" class="background-image">
+{% elif location.name == 'Mountain of dragons' %}
+    <img src="{% static 'images/hostile_locations/mountain_of_dragons.jpg' %}" alt="" class="background-image">
+{% elif location.name == 'Palace of demon lord B' %}
+    <img src="{% static 'images/hostile_locations/palace.jpg' %}" alt="" class="background-image">
+{% endif %}
+
+<p class="crimson2-separate">You have travelled to {{ location }}</p>
+
+<div class="content">
+    <ul class="ul">
+        {% for enemy in enemies_in_location %}
+            <li><a class="main-text1p5" href="{% url 'enemy_detail' enemy_name=enemy.name username=request.user.username %}">{{ enemy.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        <li><a class="nav-link crimson1b5" href="{% url 'main'%}">Main</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

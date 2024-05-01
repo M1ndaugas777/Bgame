@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/wise-elder.jpg' %}" alt="" class="background-image">
+
+<div class="content">
+
+    <p class="crimson2">You approach the wise elder</p>
+
+    <p class="main-text1p25">If you want to acquire knowledge from the wise elder,</p>
+    <p class="main-text1p25">you must pay his price. Be warned that each piece</p>
+    <p class="main-text1p25">of additional knowledge will cost more than the previous.</p>
+    <p class="main-text1p25" >First piece of knowledge is free.</p>
+
+    <p class="main-text1p25">Your money: {{ player_gold_pieces }}</p>
+    <p class="main-text1p25">Price for knowledge: {{ knowledge_price }} gold pieces.</p>
+
+    <form class="crimson1b25" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="pray">
+        <button type="submit">Pay for Knowledge</button>
+    </form>
+
+    {% if knowledge_message %}
+        <p class="main-text1p25"> Latest knowledge shared by wise elder:</p>
+        <p class="main-text1p25">{{ knowledge_message }}</p>
+    {% endif %}
+
+    {% if unlocked_knowledge_messages %}
+        <p class="crimson1b5">Previous knowledge shared by wise elder:</p>
+        <ul>
+            {% for message in unlocked_knowledge_messages %}
+                <li class="main-text1p25">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a class="nav-link crimson1b5" href="{% url 'main'%}">Main</a>
+
+</div>
+</body>
+</html>

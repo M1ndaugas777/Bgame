@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+{% for location_name, enemy_data in enemy_images.items %}
+    {% if location_name == location.name %}
+        {% for enemy_name, image_filename in enemy_data.items %}
+            {% if enemy_name == enemy.name %}
+                {% if location_name == 'Forest' %}
+                    <img src="{% static 'images/hostile_locations/forest.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% elif location_name == 'Evil forest' %}
+                    <img src="{% static 'images/hostile_locations/evil_forest.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% elif location_name == 'Cursed wastelands' %}
+                    <img src="{% static 'images/hostile_locations/cursed_wastelands.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% elif location_name == 'Endless desert' %}
+                    <img src="{% static 'images/hostile_locations/endless_desert.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% elif location_name == 'Demon wastelands' %}
+                    <img src="{% static 'images/hostile_locations/demon_wastelands.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% elif location_name == 'Mountain of dragons' %}
+                    <img src="{% static 'images/hostile_locations/mountain_of_dragons.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% elif location_name == 'Palace of demon lord B' %}
+                    <img src="{% static 'images/hostile_locations/palace.jpg' %}" alt="" class="background-image">
+                    <img src="{% static 'images/monsters/' %}{{ image_filename }}" alt="" class="enemy-image">
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+
+<div class="content">
+    <ul>
+        <li><h1 class="crimson2">You are facing {{ enemy.name }}</h1></li>
+        <li><p class="main-text1p25">{{ enemy.name }} health: {{ enemy.health }}</p></li>
+        <li><p class="main-text1p25">Your current health: {{ player_health }}</p></li>
+        <li><a class="crimson2" href="/bgame/attack_results/{{ request.user.username }}/{{ enemy.name }}/">
+            Attack {{ enemy.name }}
+        </a></li>
+    </ul>
+
+    <ul>
+        <li><a class="main-text1p25" href="{% url 'main' %}">Main</a></li>
+        <li><a class="main-text1p25" href="{% url 'location_detail' location_name=location.name %}">Return to {{ location.name }}</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

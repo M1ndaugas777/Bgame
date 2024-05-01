@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/totems.jpg' %}" alt="" class="background-image">
+
+<div class="content">
+
+    <p class="crimson2">You approach the <strong>{{ totem.totem_name }}</strong></p>
+
+    <ul>
+        {% if totem.totem_name == 'Totem of health' %}
+            <p class="main-text1p25">The first totem that just appeared out of nowhere a long time ago.</p>
+            <p class="main-text1p25">As you approach the totem of health you can feel growing stronger.</p>
+            <li class="main-text1p25">Your gold: {{ player.gold_pieces }}</li>
+            <li class="main-text1p25">Gold required for a successful prayer: {{ totem.health_prayer_price }}</li>
+            <li class="main-text1p25">Your current maximum health: {{ player.maximum_health }}</li>
+            <li>
+                <form class="main-text1p25" method="post" action="{% url 'totem_detail' totem.totem_name %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="pray">
+                    <button type="submit">Pray to {{ totem.totem_name }}</button>
+                </form>
+            </li>
+            <li><a class="nav-link crimson1b5" href="{% url 'main'%}">Main</a></li>
+        {% endif %}
+
+        {% if totem.totem_name == 'Totem of strength' %}
+            <p class="main-text1p25">The Second totem that just appeared out of nowhere a long time ago.</p>
+            <p class="main-text1p25">As you approach the totem of strength you can feel growing stronger.</p>
+            <li class="main-text1p25">Your gold: {{ player.gold_pieces }}</li>
+            <li class="main-text1p25">Gold required for a successful prayer: {{ totem.strength_prayer_price }}</li>
+            <li class="main-text1p25">Your current strength: {{ player.strength }}</li>
+            <li>
+                <form class="main-text1p25" method="post" action="{% url 'totem_detail' totem.totem_name %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="pray">
+                    <button type="submit">Pray to {{ totem.totem_name }}</button>
+                </form>
+            </li>
+            <li><a class="nav-link crimson1b5" href="{% url 'main'%}">Main</a></li>
+        {% endif %}
+
+        {% if totem.totem_name == 'Totem of defense' %}
+            <p class="main-text1p25">The Third totem that just appeared out of nowhere a long time ago.</p>
+            <p class="main-text1p25">As you approach the totem of defense you can feel growing stronger.</p>
+            <li class="main-text1p25">Your gold: {{ player.gold_pieces }}</li>
+            <li class="main-text1p25">Gold required for a successful prayer: {{ totem.defense_prayer_price }}</li>
+            <li class="main-text1p25">Your current defense: {{ player.defense }}</li>
+            <li>
+                <form class="main-text1p25" method="post" action="{% url 'totem_detail' totem.totem_name %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="pray">
+                    <button type="submit">Pray to {{ totem.totem_name }}</button>
+                </form>
+            </li>
+            <li><a class="nav-link crimson1b5" href="{% url 'main'%}">Main</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+</body>
+</html>

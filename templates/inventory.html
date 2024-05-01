@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/inventory-background.jpg' %}" alt="" class="background-image">
+
+<div class="content">
+    <p class="crimson2">{{ username }}'s inventory</p>
+
+    <ul>
+        <li><a class="main-text1p25" href="{% url 'healing_items' %}">Consumables</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Weapon' %}">Weapons</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Helmet' %}">Helmets</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Chest' %}">Chest armour</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Leg' %}">Leg armour</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Boots' %}">Boots</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Gloves' %}">Gloves</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Shield' %}">Shields</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Ring' %}">Rings</a></li>
+        <li><a class="main-text1p25" href="{% url 'items_by_type' item_type='Pet' %}">Pets</a></li>
+        <li><a class="main-text1p25 nav-link" href="{% url 'main' %}">Main</a></li>
+    </ul>
+</div>
+
+</body>
+</html>

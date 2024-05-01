@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/inventory-background.jpg' %}" alt="" class="background-image">
+
+<div class="content">
+    <p class="crimson2">Highscores:</p>
+    <a class="nav-link crimson1b5" href="{% url 'main' %}">Main</a>
+<ul>
+        {% for player in players %}
+        <li class="main-text1p25">{{ forloop.counter }}. {{ player.username }}, level: {{ player.level }}.</li>
+        {% endfor %}
+    </ul>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <img src="{% static 'images/other_images/training.jpg' %}" alt="" class="background-image">
+
+    <div class="content">
+        <p class="crimson2">Attributes of player: {{ username }}</p>
+
+        <ul>
+            <li class="main-text1p25"><strong>Level:</strong> {{ player_level }}</li>
+            <li class="main-text1p25"><strong>Health:</strong> {{ player_health }} <strong>/</strong> {{ player_maximum_health }}</li>
+            <li class="main-text1p25"><strong>Strength:</strong> {{ player_strength }}</li>
+            <li class="main-text1p25"><strong>Defense:</strong> {{ player_defense }}</li>
+            <li class="main-text1p25"><strong>Experience:</strong> {{ player_experience }} <strong>/</strong> {{ player_experience_threshold }}</li>
+            <li class="main-text1p25"><strong>Gold:</strong> {{ player_gold }}</li>
+            <li class="main-text1p25"><strong>Attribute points:</strong> {{ player_attribute_points }}</li>
+
+            <li>
+                <form class="crimson1b25" action="{% url 'allocate_points' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'player_details' username %}">
+                    <label for="strength_points">Allocate points to Strength:</label>
+                    <input type="number" name="strength_points" id="strength_points" min="0" max="{{ player_attribute_points }}" required>
+                    <button type="submit">Allocate</button>
+                </form>
+            </li>
+            <li>
+                <form class="crimson1b25" action="{% url 'allocate_points' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'player_details' username %}">
+                    <label for="health_points">Allocate points to Health:</label>
+                    <input type="number" name="health_points" id="health_points" min="0" max="{{ player_attribute_points }}" required>
+                    <button type="submit">Allocate</button>
+                </form>
+            </li>
+            <li>
+                <form class="crimson1b25" action="{% url 'allocate_points' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'player_details' username %}">
+                    <label for="defense_points">Allocate points to Defense:</label>
+                    <input type="number" name="defense_points" id="defense_points" min="0" max="{{ player_attribute_points }}" required>
+                    <button type="submit">Allocate</button>
+                </form>
+            </li>
+            <li><a class="nav-link main-text1p25" href="{% url 'main' %}">Main</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

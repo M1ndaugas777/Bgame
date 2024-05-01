@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<img src="{% static 'images/other_images/inventory-background.jpg' %}" alt="" class="background-image">
+
+<div class="content">
+
+    <p class="crimson2">Consumable items</p>
+
+    <ul>
+        <li class="main-text1p25">Your current health: {{ player.health }}/{{ player.maximum_health }}</li>
+        {% for inventory_item in items %}
+            {% if inventory_item.quantity > 0 %}
+                <li class="main-text1p25">{{ inventory_item.item.item_name }} - Quantity: ({{ inventory_item.quantity }}),
+                    {% if inventory_item.item.healing_power > 0 %}
+                        - Healing Power: {{ inventory_item.item.healing_power }}
+                    {% endif %}
+                    {% if inventory_item.item.strength_modifier > 0 %}
+                        - Strength Modifier: {{ inventory_item.item.strength_modifier }}
+                    {% endif %}
+                    {% if inventory_item.item.defense_modifier > 0 %}
+                        - Defense Modifier: {{ inventory_item.item.defense_modifier }}
+                    {% endif %}
+                    {% if inventory_item.item.health_modifier > 0 %}
+                        - Health Modifier: {{ inventory_item.item.health_modifier }}
+                    {% endif %}
+                    <a class="crimson1b25" href="{% url 'use_item' inventory_item.id %}">Use</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li><a class="nav-link crimson1b25" href="{% url 'main' %}">Main</a></li>
+        <li><a class="crimson1b25" href="{% url 'inventory' player_username %}">Inventory</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
