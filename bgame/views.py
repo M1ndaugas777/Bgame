@@ -498,6 +498,8 @@ def elder_detail(request):
     for i in range(1, elder.variable + 1):
         unlocked_knowledge_messages.append(elder.knowledge_messages[i - 1])
 
+    all_knowledge_acquired = elder.variable >= 8
+
     context = {
         'elder_name': elder_name,
         'knowledge_price': knowledge_price,
@@ -505,6 +507,7 @@ def elder_detail(request):
         'knowledge_message': knowledge_message,
         'player_gold_pieces': player_gold_pieces,
         'unlocked_knowledge_messages': unlocked_knowledge_messages,
+        'all_knowledge_acquired': all_knowledge_acquired,
     }
 
     return render(request, 'elder_detail.html', context)

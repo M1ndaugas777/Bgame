@@ -10,9 +10,9 @@
     <img src="{% static 'images/main.jpg' %}" alt="" class="background-image">
 
     {% if user.is_authenticated %}
-        <div class="top-side-stuff">
-            <ul class="horizontal-list">
-                <li><a href="{% url 'player_details' player_username %}">{{ user.get_username }}</a></li>
+        <div class="top-side-stuff ">
+            <ul class="horizontal-list ">
+                <li><a  href="{% url 'player_details' player_username %}">{{ user.get_username }}</a></li>
                 <li><a href="{% url 'about' %}" >About Bgame</a></li>
                 <li><a href="{% url 'frequent_questions' %}" >FAQ</a></li>
                 <li><a href="{% url 'highscores' %}" >Best results</a></li>
