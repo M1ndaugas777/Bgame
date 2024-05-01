@@ -7,19 +7,44 @@
 </head>
 <body>
 
-<img src="{% static 'images/other_images/inventory-background.jpg' %}" alt="" class="background-image">
-
-<ul>
-    <li><p>1.</p></li>
-
-
-
-</ul>
-<div class="content">
-    <li><a class="nav-link main-text1p25" href="{% url 'main' %}">Main</a></li>
-
-</div>
-
+    <img src="{% static 'images/other_images/inventory-background.jpg' %}" alt="" class="background-image">
+    <div class="content">
+        <ul>
+            <li class="main-text1p25">
+                <p>1. Will the game receive any updates?</p>
+            </li>
+            <li class="crimson1b5">
+                <p>Yes, our team is working every day to bring new things.</p>
+            </li>
+            <li class="main-text1p25">
+                <p>2. How frequent will the updates be?</p>
+            </li>
+            <li class="crimson1b5">
+                <p>Some updates might take a week some might take a month, there is no clear schedule.</p>
+            </li>
+            <li class="main-text1p25">
+                <p>3. Will the game stay free to play?</p>
+            </li>
+            <li class="crimson1b5">
+                <p>Yes there are no intentions to make this game payable.</p>
+            </li>
+            <li class="main-text1p25">
+                <p>4. I forgot my password what should i do?</p>
+            </li>
+            <li class="crimson1b5">
+                <p>There is a password recovery system, however if you forgot your email, contact us on bgamesupport@gmail.com</p>
+            </li>
+            <li class="main-text1p25">
+                <p>5. I found a bug / glitch in the game, what should I do?</p>
+            </li>
+            <li class="crimson1b5">
+                <p>If you discovered a bug or a glitch in a game please contatc us at bgamesupport@gmail.com</p>
+            </li>
+            <li>
+                <a class="nav-link main-text1p25" href="{% url 'main' %}">Main</a>
+            </li>
+        </ul>
+    </div>
 
 </body>
 </html>

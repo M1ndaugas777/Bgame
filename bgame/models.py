@@ -322,10 +322,12 @@ class WiseElder(models.Model):
         "3. If you want to aquire wealth, consider doing a lot of low effort task's, instead of a few high effort ones.",
         "4. If you desire power not money, in that case doing a few difficult task's is more rewarding than alot of"
         " easy ones.",
-        'Knowledge message 4',
-        'Knowledge message 5',
-        'Knowledge message 6',
-        'Knowledge message 7'
+        '5. Who knows if my vision was correct, only you can prove it.',
+        '6. I see you are persistant on your quest, you might want to consider obtaining powerfull pets and rings,'
+        ' as they will enhance your abilities the most.'
+        '7. If you really want to stand a change againts Demon lord B, you should consider obtaining items from another'
+        ' dimension.',
+        '8. There is nothing more i can tell you Best of luck warrior!'
     ]
 
     def pay(self, player):
