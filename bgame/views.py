@@ -260,6 +260,7 @@ def attack_results(request, username, enemy_name):
     return render(request, 'attack_results.html', context)
 
 
+@login_required
 @csrf_protect
 def register(request):
     if request.method == "POST":
