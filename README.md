@@ -15,3 +15,5 @@ Kurejas ir kontaktai
 
 Kūrėjas: Mindaugas Zolba
 Kontaktai: 1mindaugaszolba@gmail.com
+
+Sukurta su Python versija 3.12
