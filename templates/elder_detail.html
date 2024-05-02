@@ -24,7 +24,7 @@
     <form class="crimson1b25" method="post">
         {% csrf_token %}
         <input type="hidden" name="action" value="pray">
-        {% if not all_knowledge_acquired %}  <!-- Check if all knowledge has been acquired -->
+        {% if not all_knowledge_acquired %}
             <button type="submit">Pay for Knowledge</button>
         {% endif %}
     </form>
